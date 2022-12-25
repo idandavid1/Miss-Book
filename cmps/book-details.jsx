@@ -1,3 +1,4 @@
+import { LongTxt } from "./long-txt.jsx";
 
 export function BookDetails({ book, onGoBack }) {
     function pageCount() {
@@ -33,7 +34,7 @@ export function BookDetails({ book, onGoBack }) {
             </ul>
             <h3>publishedDate: {publishedDate()}</h3>
             <img src={book.thumbnail} />
-            <h3>description: {book.description}</h3>
+            <h3>description: <LongTxt txt={book.description}/></h3>
             <h3>categories</h3>
             <ul>
             {book.categories.map((category, idx) => <li key={idx}>{category}</li>)}

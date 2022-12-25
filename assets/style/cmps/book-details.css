@@ -22,3 +22,9 @@
 .green {
     color: green;
 }
+
+.toggle-txt {
+    font-size: 25px;
+    font-weight: bolder;
+    cursor: pointer;
+}

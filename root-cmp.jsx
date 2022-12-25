@@ -8,14 +8,16 @@ export function App() {
     let [page, setPage] = useState('home')
     return <section className="app">
         <header className="app-header">
-            <h1>My Book App</h1>
-            <nav className="app-nav">
-                <a href="#" onClick={() => setPage('home')}>Home</a> | 
-                <a href="#" onClick={() => setPage('about')}>About</a> | 
-                <a href="#" onClick={() => setPage('book')}>Books</a>
-            </nav>
+            <div className='header-content layout'>
+                <h1>My Book App</h1>
+                <nav className="app-nav">
+                    <a href="#" onClick={() => setPage('home')}>Home</a> | 
+                    <a href="#" onClick={() => setPage('about')}>About</a> | 
+                    <a href="#" onClick={() => setPage('book')}>Books</a>
+                </nav>
+            </div>
         </header>
-        <main>
+        <main className='layout'>
             {page === 'home' && <Home/>}
             {page === 'about' && <About/>}
             {page === 'book' && <BookIndex/>}
