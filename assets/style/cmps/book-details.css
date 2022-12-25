@@ -1,0 +1,24 @@
+
+.book-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.details-container{
+    width: 300px;
+}
+
+.details-container h1{
+    font-size: 40px;
+    text-align: center;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
