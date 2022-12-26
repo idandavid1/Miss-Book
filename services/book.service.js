@@ -6,7 +6,8 @@ export const bookService = {
     query,
     get,
     remove,
-    save
+    save,
+    createEmptyBook
 }
 
 function query(filterBy) {
@@ -34,11 +35,29 @@ function remove(carId) {
 }
 
 function save(book) {
+  console.log('bookservice:', book)
   if (book.id) {
       return storageService.put(BOOKS_KEY, book)
   } else {
       return storageService.post(BOOKS_KEY, book)
   }
+}
+
+function createEmptyBook() {
+  return {title: '',
+          subtitle: '',
+          authors: [],
+          publishedDate: '',
+          description: '',
+          pageCount: 0,
+          categories: [],
+          thumbnail: '',
+          language: 'en',
+          thumbnail: '',
+          listPrice: {amount: 0,
+          currencyCode: '',
+          isOnSale: false}
+        }
 }
 
 function _createBooks() {
