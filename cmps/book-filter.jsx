@@ -23,23 +23,24 @@ export function BookFilter({ onSetFilter }) {
     return <section className="book-filter">
         <h2>Filter</h2>
         <form onSubmit={onSubmitFilter}>
-            <label htmlFor="name">Name:</label>
-            <input type="text"
+            <div>
+                <label htmlFor="name">Book title:</label>
+                <input type="text"
                 id="name"
                 name="name"
                 placeholder="By name"
                 value={filterByToEdit.name}
-                onChange={handleChange}
-            />
-
-            <label htmlFor="price">Max-price:</label>
-            <input type="number"
+                onChange={handleChange}/>
+            </div>
+            <div>
+                <label htmlFor="price">Max-price:</label>
+                <input type="number"
                 id="price"
                 name="price"
                 placeholder="By price"
                 value={filterByToEdit.price}
-                onChange={handleChange}
-            />
+                onChange={handleChange}/>
+            </div>
             <button>Filter books</button>
         </form>
     </section>

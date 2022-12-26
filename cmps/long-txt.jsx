@@ -4,8 +4,12 @@ export function LongTxt({txt, length = 100}) {
     const [isRenderAll, setIsRenderAll] = useState(false)
 
     function renderTxt() {
-        if(length >= txt.length || isRenderAll) return txt
-        else return txt.slice(0, length)
+        const lengthTxt = txt.length
+        if(length >= lengthTxt || isRenderAll) return txt
+        else {
+            while(length < lengthTxt && txt.charAt(length) !== ' ') length++
+            return txt.slice(0, length)
+        }
     }
 
     return <div>

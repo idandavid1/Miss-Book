@@ -5,7 +5,8 @@ const BOOKS_KEY = 'booksDB'
 export const bookService = {
     query,
     get,
-    remove
+    remove,
+    save
 }
 
 function query(filterBy) {
@@ -30,6 +31,14 @@ function get(bookId) {
 
 function remove(carId) {
   return storageService.remove(BOOKS_KEY, carId)
+}
+
+function save(book) {
+  if (book.id) {
+      return storageService.put(BOOKS_KEY, book)
+  } else {
+      return storageService.post(BOOKS_KEY, book)
+  }
 }
 
 function _createBooks() {

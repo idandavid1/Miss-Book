@@ -1,6 +1,27 @@
-import { LongTxt } from "./long-txt.jsx";
+const { useEffect, useState } = React
+const { useParams, useNavigate} = ReactRouterDOM
 
-export function BookDetails({ book, onGoBack }) {
+
+import { LongTxt } from "./long-txt.jsx"
+import { bookService } from '../services/book.service.js'
+
+export function BookDetails() {
+    let [book, setBook] = useState(null)
+    const params = useParams()
+    const navigate = useNavigate()
+
+    useEffect(()=>{
+        loadBook()
+    },[])
+
+    function loadBook() {
+        bookService.get(params.bookId).then(setBook)
+        .catch((err) => {
+            console.log('can not load book', err)
+            navigate('/book')
+        })
+    }
+
     function pageCount() {
         const pageCount = book.pageCount
         if(pageCount > 500) return `${pageCount} (Serious Reading)`
@@ -24,6 +45,7 @@ export function BookDetails({ book, onGoBack }) {
         if(price < 20) return 'green'
         else return ''
     }
+    if(!book) return <div>Loading...</div>
     return <section className="book-details">
         <div className="details-container">
             <h1>{book.title}</h1>
@@ -42,7 +64,7 @@ export function BookDetails({ book, onGoBack }) {
             <h3 className={priceClass()}>price: {book.listPrice.amount}</h3>
             <h3>Number of page: {pageCount()}</h3>
             <h3>is on sale: {book.listPrice.isOnSale ? 'yes' : 'no'}</h3>
-            <button onClick={onGoBack}>Go Back</button>
+            <button onClick={() => navigate('/book')}>Go Back</button>
         </div>
     </section>
 }
