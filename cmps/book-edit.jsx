@@ -28,11 +28,12 @@ export function BookEdit() {
         setBook((prevBook) => ({ ...prevBook, [field]: value }))
     }
 
-    function handleChangePrice({ target }) {
-        let { value} = target
+    function handleChangeListPrice({ target }) {
+        let { value, type, name: field } = target
+        value = type === 'number' ? +value : value
         setBook((prevBook) => {
             const book = { ...prevBook}
-            book.listPrice.amount = +value
+            book.listPrice[field] = value
             return book
         })
     }
@@ -46,7 +47,7 @@ export function BookEdit() {
         })
     }
 
-    return <section className="book-filter">
+    return <section className="book-edit">
         <h2>Add book</h2>
         <form onSubmit={onSubmitBook}>
             <div>
@@ -59,13 +60,73 @@ export function BookEdit() {
                 onChange={handleChange}/>
             </div>
             <div>
-                <label htmlFor="price">price:</label>
+                <div><label htmlFor="subtitle">Book subtitle:</label></div>
+                <textarea type="text"
+                id="subtitle"
+                name="subtitle"
+                placeholder="Enter subtitle"
+                value={book.subtitle}
+                onChange={handleChange}/>
+            </div>
+            <div>
+                <div><label htmlFor="description">description: </label></div>
+                <textarea type="text"
+                id="description"
+                name="description"
+                placeholder="Enter description"
+                value={book.description}
+                onChange={handleChange}/>
+            </div>
+            <div>
+                <label htmlFor="thumbnail">Book url img:</label>
+                <input type="url"
+                id="thumbnail"
+                name="thumbnail"
+                placeholder="Enter url"
+                value={book.thumbnail}
+                onChange={handleChange}/>
+            </div>
+            <div>
+                <label htmlFor="pageCount">Number of page: </label>
                 <input type="number"
-                id="price"
-                name="price"
+                id="pageCount"
+                name="pageCount"
+                value={book.pageCount}
+                onChange={handleChange}/>
+            </div>
+            <div>
+                <label htmlFor="language">Book language:</label>
+                <input type="text"
+                id="language"
+                name="language"
+                placeholder="Enter language"
+                value={book.language}
+                onChange={handleChange}/>
+            </div>
+            <div>
+                <label htmlFor="amount">price:</label>
+                <input type="number"
+                id="amount"
+                name="amount"
                 placeholder="By price"
                 value={book.listPrice.amount}
-                onChange={handleChangePrice}/>
+                onChange={handleChangeListPrice}/>
+            </div>
+            <div>
+                <label htmlFor="currencyCode">currencyCode: </label>
+                <input type="text"
+                id="currencyCode"
+                name="currencyCode"
+                value={book.listPrice.currencyCode}
+                onChange={handleChangeListPrice}/>
+            </div>
+            <div>
+                <label htmlFor="isOnSale">Is on sale: </label>
+                <input type="checkbox"
+                id="isOnSale"
+                name="isOnSale"
+                value={book.listPrice.isOnSale}
+                onChange={handleChangeListPrice}/>
             </div>
             <button>Save books</button>
         </form>

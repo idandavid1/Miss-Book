@@ -1,5 +1,5 @@
 
-.book-details {
+.flex-details {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -8,7 +8,14 @@
 
 .details-container{
     width: 400px;
+    display: flex;
+    flex-direction: column;
 }
+
+.details-container button{
+    max-width: 100px;
+}
+
 
 .details-container h1{
     font-size: 40px;
@@ -28,3 +35,4 @@
     font-weight: bolder;
     cursor: pointer;
 }
+

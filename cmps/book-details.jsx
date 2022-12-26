@@ -1,12 +1,17 @@
 const { useEffect, useState } = React
-const { useParams, useNavigate} = ReactRouterDOM
+const { useParams, useNavigate, Link} = ReactRouterDOM
 
+
+import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
+import { bookService } from '../services/book.service.js'
 
 import { LongTxt } from "./long-txt.jsx"
-import { bookService } from '../services/book.service.js'
+import { AddReview } from "./add-review.jsx"
+import { ReviewList } from "./review-list.jsx"
 
 export function BookDetails() {
     let [book, setBook] = useState(null)
+    let [isAddReview, setIsAddReview] = useState(false)
     const params = useParams()
     const navigate = useNavigate()
 
@@ -45,26 +50,44 @@ export function BookDetails() {
         if(price < 20) return 'green'
         else return ''
     }
+
+    function onRemoveReview(reviewId) {
+        const reviews = book.review.filter(review => review.id !== reviewId)
+        const bookToSave =  { ...book, 'review': reviews }
+        bookService.save(bookToSave).then((book) => {
+            setBook(book)
+            showSuccessMsg('Review deleted!')
+        })
+    }
+
     if(!book) return <div>Loading...</div>
     return <section className="book-details">
-        <div className="details-container">
-            <h1>{book.title}</h1>
-            <h3>subtitle: {book.subtitle}</h3>
-            <h3>authors</h3>
-            <ul>
-            {book.authors.map((author, idx) => <li key={idx}>{author}</li>)}
-            </ul>
-            <h3>publishedDate: {publishedDate()}</h3>
-            <img src={book.thumbnail} />
-            <h3>description: <LongTxt txt={book.description}/></h3>
-            <h3>categories</h3>
-            <ul>
-            {book.categories.map((category, idx) => <li key={idx}>{category}</li>)}
-            </ul>
-            <h3 className={priceClass()}>price: {book.listPrice.amount}</h3>
-            <h3>Number of page: {pageCount()}</h3>
-            <h3>is on sale: {book.listPrice.isOnSale ? 'yes' : 'no'}</h3>
-            <button onClick={() => navigate('/book')}>Go Back</button>
+        <div className="flex-details">
+            <div className="details-container ">
+                <h1>{book.title}</h1>
+                <h3>subtitle: {book.subtitle}</h3>
+                <h3>authors</h3>
+                <ul>
+                {book.authors.map((author, idx) => <li key={idx}>{author}</li>)}
+                </ul>
+                <h3>publishedDate: {publishedDate()}</h3>
+                <img src={book.thumbnail} />
+                <h3>description: <LongTxt txt={book.description}/></h3>
+                <h3>categories</h3>
+                <ul>
+                {book.categories.map((category, idx) => <li key={idx}>{category}</li>)}
+                </ul>
+                <h3 className={priceClass()}>price: {book.listPrice.amount}</h3>
+                <h3>Number of page: {pageCount()}</h3>
+                <h3>is on sale: {book.listPrice.isOnSale ? 'yes' : 'no'}</h3>
+                <div>
+                    <button onClick={() => navigate('/book')}>Go back</button>
+                    <button><Link to={`/book/edit/${book.id}`}>Update book</Link></button>
+                </div>
+                {isAddReview && <AddReview book={book} setBook={setBook}/>}
+            <button onClick={() => setIsAddReview((prev) => !prev)}>{!isAddReview ? 'Add review' : 'Close'}</button>
+            </div>
         </div>
+        <ReviewList reviews={book.review} onRemoveReview={onRemoveReview}/>
     </section>
 }

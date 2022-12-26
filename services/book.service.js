@@ -7,7 +7,8 @@ export const bookService = {
     get,
     remove,
     save,
-    createEmptyBook
+    createEmptyBook,
+    createEmptyReview
 }
 
 function query(filterBy) {
@@ -35,7 +36,6 @@ function remove(carId) {
 }
 
 function save(book) {
-  console.log('bookservice:', book)
   if (book.id) {
       return storageService.put(BOOKS_KEY, book)
   } else {
@@ -53,11 +53,24 @@ function createEmptyBook() {
           categories: [],
           thumbnail: '',
           language: 'en',
-          thumbnail: '',
           listPrice: {amount: 0,
           currencyCode: '',
-          isOnSale: false}
+          isOnSale: false},
+          review: []
         }
+}
+
+function createEmptyReview() {
+  return {
+      id: utilService.makeId(),
+      name: '',
+      rate: 0,
+      readAt: new Date()
+  }
+}
+
+function removeReviews(reviewId, book) {
+  return book.review.filter(review => review.id !== reviewId)
 }
 
 function _createBooks() {
@@ -82,7 +95,8 @@ function _createBooks() {
       "amount": 109,
       "currencyCode": "EUR",
       "isOnSale": false
-    }
+    },
+    "review" : []
   },
   {
     "id": "JYOJa2NpSCq",
@@ -104,7 +118,8 @@ function _createBooks() {
       "amount": 44,
       "currencyCode": "EUR",
       "isOnSale": true
-    }
+    },
+    "review" : []
   },
   {
     "id": "1y0Oqts35DQ",
@@ -126,7 +141,8 @@ function _createBooks() {
       "amount": 108,
       "currencyCode": "ILS",
       "isOnSale": false
-    }
+    },
+    "review" : []
   },
   {
     "id": "kSnfIJyikTP",
@@ -148,7 +164,8 @@ function _createBooks() {
       "amount": 30,
       "currencyCode": "EUR",
       "isOnSale": true
-    }
+    },
+    "review" : []
   },
   {
     "id": "f4iuVmbuKCC",
@@ -170,7 +187,8 @@ function _createBooks() {
       "amount": 19,
       "currencyCode": "USD",
       "isOnSale": false
-    }
+    },
+    "review" : []
   },
   {
     "id": "U2rfZO6oBZf",
@@ -192,7 +210,8 @@ function _createBooks() {
       "amount": 91,
       "currencyCode": "USD",
       "isOnSale": true
-    }
+    },
+    "review" : []
   },
   {
     "id": "xI0wrXaaAcq",
@@ -214,7 +233,8 @@ function _createBooks() {
       "amount": 90,
       "currencyCode": "USD",
       "isOnSale": false
-    }
+    },
+    "review" : []
   },
   {
     "id": "9laHCEdSpFy",
@@ -236,7 +256,8 @@ function _createBooks() {
       "amount": 176,
       "currencyCode": "EUR",
       "isOnSale": false
-    }
+    },
+    "review" : []
   },
   {
     "id": "nGhVwZvGCGp",
@@ -258,7 +279,8 @@ function _createBooks() {
       "amount": 116,
       "currencyCode": "USD",
       "isOnSale": true
-    }
+    },
+    "review" : []
   },
   {
     "id": "Q8Q9Lsd03BD",
@@ -280,7 +302,8 @@ function _createBooks() {
       "amount": 145,
       "currencyCode": "EUR",
       "isOnSale": false
-    }
+    },
+    "review" : []
   },
   {
     "id": "bd7a76kARao",
@@ -302,7 +325,8 @@ function _createBooks() {
       "amount": 157,
       "currencyCode": "ILS",
       "isOnSale": true
-    }
+    },
+    "review" : []
   },
   {
     "id": "qKyG0vqeO3e",
@@ -324,7 +348,8 @@ function _createBooks() {
       "amount": 57,
       "currencyCode": "USD",
       "isOnSale": true
-    }
+    },
+    "review" : []
   },
   {
     "id": "2RvT48ZNInj",
@@ -346,7 +371,8 @@ function _createBooks() {
       "amount": 167,
       "currencyCode": "ILS",
       "isOnSale": false
-    }
+    },
+    "review" : []
   },
   {
     "id": "5z2s9pDXAYj",
@@ -368,7 +394,8 @@ function _createBooks() {
       "amount": 150,
       "currencyCode": "USD",
       "isOnSale": true
-    }
+    },
+    "review" : []
   },
   {
     "id": "zBZu5cDEWha",
@@ -390,7 +417,8 @@ function _createBooks() {
       "amount": 58,
       "currencyCode": "ILS",
       "isOnSale": true
-    }
+    },
+    "review" : []
   },
   {
     "id": "aOI7tQuPZ2f",
@@ -412,7 +440,8 @@ function _createBooks() {
       "amount": 78,
       "currencyCode": "USD",
       "isOnSale": false
-    }
+    },
+    "review" : []
   },
   {
     "id": "WBooB82Uvwu",
@@ -434,7 +463,8 @@ function _createBooks() {
       "amount": 118,
       "currencyCode": "ILS",
       "isOnSale": false
-    }
+    },
+    "review" : []
   },
   {
     "id": "xm1z5bbZjlS",
@@ -456,7 +486,8 @@ function _createBooks() {
       "amount": 60,
       "currencyCode": "EUR",
       "isOnSale": false
-    }
+    },
+    "review" : []
   },
   {
     "id": "u3j6QIKLlJb",
@@ -478,7 +509,8 @@ function _createBooks() {
       "amount": 110,
       "currencyCode": "USD",
       "isOnSale": true
-    }
+    },
+    "review" : []
   },
   {
     "id": "vxYYYdVlEH3",
@@ -500,7 +532,8 @@ function _createBooks() {
       "amount": 186,
       "currencyCode": "ILS",
       "isOnSale": true
-    }
+    },
+    "review" : []
   }
 ]
   utilService.saveToStorage(BOOKS_KEY, books)
