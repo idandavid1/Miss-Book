@@ -31,9 +31,12 @@ export function BookEdit() {
     function handleChangeListPrice({ target }) {
         let { value, type, name: field } = target
         value = type === 'number' ? +value : value
+        console.log('value:', value)
         setBook((prevBook) => {
             const book = { ...prevBook}
-            book.listPrice[field] = value
+            if(value === 'on') book.listPrice[field] = false
+            else if(value === 'off') book.listPrice[field] = true
+            else book.listPrice[field] = value
             return book
         })
     }
@@ -125,7 +128,7 @@ export function BookEdit() {
                 <input type="checkbox"
                 id="isOnSale"
                 name="isOnSale"
-                value={book.listPrice.isOnSale}
+                value={book.listPrice.isOnSale ? 'on' : 'off'}
                 onChange={handleChangeListPrice}/>
             </div>
             <button>Save books</button>

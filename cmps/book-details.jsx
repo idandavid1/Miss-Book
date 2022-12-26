@@ -84,7 +84,7 @@ export function BookDetails() {
                     <button onClick={() => navigate('/book')}>Go back</button>
                     <button><Link to={`/book/edit/${book.id}`}>Update book</Link></button>
                 </div>
-                {isAddReview && <AddReview book={book} setBook={setBook}/>}
+                {isAddReview && <AddReview book={book} setBook={setBook} setIsAddReview={setIsAddReview} />}
             <button onClick={() => setIsAddReview((prev) => !prev)}>{!isAddReview ? 'Add review' : 'Close'}</button>
             </div>
         </div>

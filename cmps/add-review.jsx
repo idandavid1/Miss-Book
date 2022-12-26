@@ -3,7 +3,7 @@ import { bookService } from '../services/book.service.js'
 
 const { useState } = React
 
-export function AddReview({ book, setBook }) {
+export function AddReview({ book, setBook, setIsAddReview }) {
     const [review, setReview] = useState(bookService.createEmptyReview())
 
     function handleChange({ target }) {
@@ -19,6 +19,7 @@ export function AddReview({ book, setBook }) {
         const bookToSave =  { ...book, 'review': reviews }
         bookService.save(bookToSave).then((book) => {
             setBook(book)
+            setIsAddReview((prev) => !prev)
             console.log('book:', book)
             showSuccessMsg('Review saved!')
         })
@@ -36,7 +37,7 @@ export function AddReview({ book, setBook }) {
             onChange={handleChange}/>
         </div>
         <div>
-        <label htmlFor="rate">rate:</label>
+        <label htmlFor="rate">rate: </label>
             <input type="range"
             id="rate"
             name="rate"
