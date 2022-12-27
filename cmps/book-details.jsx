@@ -66,6 +66,10 @@ export function BookDetails() {
             setBook(book)
             showSuccessMsg('Review deleted!')
         })
+        .catch(err => {
+            console.log('err:', err)
+            showErrorMsg('can not remove review')
+        })
     }
 
     if(!book) return <Loading />
