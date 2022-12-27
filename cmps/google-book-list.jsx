@@ -1,6 +1,7 @@
+import { Loading } from './loading.jsx';
 
 export function GoogleBookList({ books,  onAddBook}) {
-    if(!books) return <div>Loading...</div>
+    if(!books) return <Loading />
     return <ul className="google-book-list">
         {
             books.map(book => <li key={book.id}>

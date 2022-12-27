@@ -9,6 +9,7 @@ import { utilService } from '../services/util.service.js'
 import { LongTxt } from "./long-txt.jsx"
 import { AddReview } from "./add-review.jsx"
 import { ReviewList } from "./review-list.jsx"
+import { Loading } from './loading.jsx';
 
 export function BookDetails() {
     let [book, setBook] = useState(null)
@@ -67,7 +68,7 @@ export function BookDetails() {
         })
     }
 
-    if(!book) return <div>Loading...</div>
+    if(!book) return <Loading />
     return <section className="book-details">
         <div className="flex-details">
             <div className="details-container ">
