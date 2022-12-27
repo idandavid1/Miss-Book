@@ -4,6 +4,7 @@ const { useParams, useNavigate, Link} = ReactRouterDOM
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js';
 import { bookService } from '../services/book.service.js'
+import { utilService } from '../services/util.service.js'
 
 import { LongTxt } from "./long-txt.jsx"
 import { AddReview } from "./add-review.jsx"
@@ -52,8 +53,8 @@ export function BookDetails() {
     }
 
     function onRemoveReview(reviewId) {
-        const reviews = book.review.filter(review => review.id !== reviewId)
-        const bookToSave =  { ...book, 'review': reviews }
+        const reviews = book.reviews.filter(review => review.id !== reviewId)
+        const bookToSave =  { ...book, 'reviews': reviews }
         bookService.save(bookToSave).then((book) => {
             setBook(book)
             showSuccessMsg('Review deleted!')
@@ -77,7 +78,7 @@ export function BookDetails() {
                 <ul>
                 {book.categories.map((category, idx) => <li key={idx}>{category}</li>)}
                 </ul>
-                <h3 className={priceClass()}>price: {book.listPrice.amount}</h3>
+                <h3 className={priceClass()}>price: {utilService.getPrice(book.listPrice.amount, book.language, book.listPrice.currencyCode)}</h3>
                 <h3>Number of page: {pageCount()}</h3>
                 <h3>is on sale: {book.listPrice.isOnSale ? 'yes' : 'no'}</h3>
                 <div>
@@ -88,6 +89,6 @@ export function BookDetails() {
             <button onClick={() => setIsAddReview((prev) => !prev)}>{!isAddReview ? 'Add review' : 'Close'}</button>
             </div>
         </div>
-        <ReviewList reviews={book.review} onRemoveReview={onRemoveReview}/>
+        <ReviewList reviews={book.reviews} onRemoveReview={onRemoveReview}/>
     </section>
 }

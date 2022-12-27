@@ -56,7 +56,7 @@ function createEmptyBook() {
           listPrice: {amount: 0,
           currencyCode: '',
           isOnSale: false},
-          review: []
+          reviews: []
         }
 }
 
@@ -67,10 +67,6 @@ function createEmptyReview() {
       rate: 0,
       readAt: new Date()
   }
-}
-
-function removeReviews(reviewId, book) {
-  return book.review.filter(review => review.id !== reviewId)
 }
 
 function _createBooks() {
@@ -96,7 +92,7 @@ function _createBooks() {
       "currencyCode": "EUR",
       "isOnSale": false
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "JYOJa2NpSCq",
@@ -119,7 +115,7 @@ function _createBooks() {
       "currencyCode": "EUR",
       "isOnSale": true
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "1y0Oqts35DQ",
@@ -142,7 +138,7 @@ function _createBooks() {
       "currencyCode": "ILS",
       "isOnSale": false
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "kSnfIJyikTP",
@@ -165,7 +161,7 @@ function _createBooks() {
       "currencyCode": "EUR",
       "isOnSale": true
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "f4iuVmbuKCC",
@@ -188,7 +184,7 @@ function _createBooks() {
       "currencyCode": "USD",
       "isOnSale": false
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "U2rfZO6oBZf",
@@ -211,7 +207,7 @@ function _createBooks() {
       "currencyCode": "USD",
       "isOnSale": true
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "xI0wrXaaAcq",
@@ -234,7 +230,7 @@ function _createBooks() {
       "currencyCode": "USD",
       "isOnSale": false
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "9laHCEdSpFy",
@@ -257,7 +253,7 @@ function _createBooks() {
       "currencyCode": "EUR",
       "isOnSale": false
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "nGhVwZvGCGp",
@@ -280,7 +276,7 @@ function _createBooks() {
       "currencyCode": "USD",
       "isOnSale": true
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "Q8Q9Lsd03BD",
@@ -303,7 +299,7 @@ function _createBooks() {
       "currencyCode": "EUR",
       "isOnSale": false
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "bd7a76kARao",
@@ -326,7 +322,7 @@ function _createBooks() {
       "currencyCode": "ILS",
       "isOnSale": true
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "qKyG0vqeO3e",
@@ -349,7 +345,7 @@ function _createBooks() {
       "currencyCode": "USD",
       "isOnSale": true
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "2RvT48ZNInj",
@@ -372,7 +368,7 @@ function _createBooks() {
       "currencyCode": "ILS",
       "isOnSale": false
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "5z2s9pDXAYj",
@@ -395,7 +391,7 @@ function _createBooks() {
       "currencyCode": "USD",
       "isOnSale": true
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "zBZu5cDEWha",
@@ -418,7 +414,7 @@ function _createBooks() {
       "currencyCode": "ILS",
       "isOnSale": true
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "aOI7tQuPZ2f",
@@ -441,7 +437,7 @@ function _createBooks() {
       "currencyCode": "USD",
       "isOnSale": false
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "WBooB82Uvwu",
@@ -464,7 +460,7 @@ function _createBooks() {
       "currencyCode": "ILS",
       "isOnSale": false
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "xm1z5bbZjlS",
@@ -487,7 +483,7 @@ function _createBooks() {
       "currencyCode": "EUR",
       "isOnSale": false
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "u3j6QIKLlJb",
@@ -510,7 +506,7 @@ function _createBooks() {
       "currencyCode": "USD",
       "isOnSale": true
     },
-    "review" : []
+    "reviews" : []
   },
   {
     "id": "vxYYYdVlEH3",
@@ -533,7 +529,7 @@ function _createBooks() {
       "currencyCode": "ILS",
       "isOnSale": true
     },
-    "review" : []
+    "reviews" : []
   }
 ]
   utilService.saveToStorage(BOOKS_KEY, books)

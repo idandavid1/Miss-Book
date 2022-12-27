@@ -3,3 +3,7 @@
   color: var(--clr2bg);
   padding: 1em;
 }
+
+.active {
+  color:rgb(162, 116, 139)
+}

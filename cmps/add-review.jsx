@@ -14,14 +14,17 @@ export function AddReview({ book, setBook, setIsAddReview }) {
 
     function onSubmitReview(ev) {
         ev.preventDefault()
-        const reviews =  book.review
+        const reviews =  book.reviews
         reviews.push(review)
-        const bookToSave =  { ...book, 'review': reviews }
+        const bookToSave =  { ...book, 'reviews': reviews }
         bookService.save(bookToSave).then((book) => {
             setBook(book)
             setIsAddReview((prev) => !prev)
-            console.log('book:', book)
             showSuccessMsg('Review saved!')
+        })
+        .catch((err) => {
+            console.log('can not add review:', err)
+            showErrorMsg('Could not add review, try again please!')
         })
     }
 
@@ -48,7 +51,7 @@ export function AddReview({ book, setBook, setIsAddReview }) {
         </div>
         <div>
         <label htmlFor="readAt">read at:</label>
-            <input type="datetime-local"
+            <input type="date"
             id="readAt"
             name="readAt"
             value={review.readAt}
