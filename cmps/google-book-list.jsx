@@ -1,0 +1,12 @@
+
+export function GoogleBookList({ books,  onAddBook}) {
+    if(!books) return <div>Loading...</div>
+    return <ul className="google-book-list">
+        {
+            books.map(book => <li key={book.id}>
+               {book.title}
+                <button onClick={() => onAddBook(book.id)}>+</button>
+            </li>)
+        }
+    </ul>
+}

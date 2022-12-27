@@ -8,7 +8,10 @@ export const bookService = {
     remove,
     save,
     createEmptyBook,
-    createEmptyReview
+    createEmptyReview,
+    getNextPrevBookId,
+    addGoogleBook,
+    isHaveBook
 }
 
 function query(filterBy) {
@@ -60,6 +63,16 @@ function createEmptyBook() {
         }
 }
 
+function getNextPrevBookId(bookId, diff) {
+  return storageService.query(BOOKS_KEY)
+      .then(books => {
+          const idx = books.findIndex(book => book.id === bookId)
+          if (idx === books.length - 1 && diff === 1 
+            || idx === 0 && diff === -1) return bookId
+          return books[idx + diff].id
+      })
+}
+
 function createEmptyReview() {
   return {
       id: utilService.makeId(),
@@ -67,6 +80,38 @@ function createEmptyReview() {
       rate: 0,
       readAt: new Date()
   }
+}
+
+function addGoogleBook(googleBook) {
+  const book = {
+          id: googleBook.id,
+          title: googleBook.volumeInfo.title,
+          subtitle: googleBook.volumeInfo.subtitle,
+          authors: googleBook.volumeInfo.authors || [],
+          publishedDate: googleBook.volumeInfo.publishedDate,
+          description: googleBook.volumeInfo.description,
+          pageCount: googleBook.volumeInfo.pageCount,
+          categories: googleBook.volumeInfo.categories || [],
+          thumbnail: googleBook.volumeInfo.imageLinks.thumbnail,
+          language: googleBook.volumeInfo.language,
+          listPrice: {
+          amount: 0,
+          currencyCode: 'EUR',
+          isOnSale: false},
+          reviews: []
+        }
+
+  return storageService.query(BOOKS_KEY).then(books => {
+    books.push(book)
+    utilService.saveToStorage(BOOKS_KEY, books)
+    return book
+  })
+}
+
+function isHaveBook(bookId) {
+  return storageService.query(BOOKS_KEY).then(books => {
+    return books.findIndex(book => book.id === bookId) !== -1
+  })
 }
 
 function _createBooks() {

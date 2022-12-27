@@ -7,9 +7,18 @@ export const utilService = {
     padNum,
     getDayName,
     getMonthName,
-    getPrice
+    getPrice,
+    debounce
 }
 
+function debounce(func, timeout = 2000){
+    let timer;
+    return (...args) => {
+      clearTimeout(timer);
+      timer = setTimeout(() => { func.apply(this, args); }, timeout);
+    };
+  }
+  
 function makeId(length = 6) {
     var txt = ''
     var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'

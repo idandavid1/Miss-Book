@@ -13,19 +13,25 @@ import { ReviewList } from "./review-list.jsx"
 export function BookDetails() {
     let [book, setBook] = useState(null)
     let [isAddReview, setIsAddReview] = useState(false)
-    const params = useParams()
+    const [nextBookId, setNextBookId] = useState(null)
+    const [prevBookId, setPrevBookId] = useState(null)
+    const { bookId } = useParams()
     const navigate = useNavigate()
 
     useEffect(()=>{
         loadBook()
-    },[])
+    },[bookId])
 
     function loadBook() {
-        bookService.get(params.bookId).then(setBook)
+        bookService.get(bookId).then(setBook)
         .catch((err) => {
             console.log('can not load book', err)
             navigate('/book')
         })
+        bookService.getNextPrevBookId(bookId, 1)
+            .then(setNextBookId)
+        bookService.getNextPrevBookId(bookId, -1)
+        .then(setPrevBookId)
     }
 
     function pageCount() {
@@ -84,6 +90,8 @@ export function BookDetails() {
                 <div>
                     <button onClick={() => navigate('/book')}>Go back</button>
                     <button><Link to={`/book/edit/${book.id}`}>Update book</Link></button>
+                    <button><Link to={`/book/${prevBookId}`}>Prev book</Link></button>
+                    <button><Link to={`/book/${nextBookId}`}>Next book</Link></button>
                 </div>
                 {isAddReview && <AddReview book={book} setBook={setBook} setIsAddReview={setIsAddReview} />}
             <button onClick={() => setIsAddReview((prev) => !prev)}>{!isAddReview ? 'Add review' : 'Close'}</button>

@@ -39,6 +39,7 @@ export function BookIndex () {
             <h1>Welcome book page</h1>
             <BookFilter onSetFilter={onSetFilter} />
             <button><Link to="/book/edit">Add book!</Link></button>
+            <button><Link to="/book/addBook">Add google book!</Link></button>
             <BookList books={books} onRemoveBook={onRemoveBook} />
         </div>
     </section>

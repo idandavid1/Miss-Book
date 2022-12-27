@@ -4,6 +4,7 @@ export function LongTxt({txt, length = 100}) {
     const [isRenderAll, setIsRenderAll] = useState(false)
 
     function renderTxt() {
+        if(!txt) return
         const lengthTxt = txt.length
         if(length >= lengthTxt || isRenderAll) return txt
         else {

@@ -31,12 +31,12 @@ export function BookEdit() {
     function handleChangeListPrice({ target }) {
         let { value, type, name: field } = target
         value = type === 'number' ? +value : value
+        if(type === 'checkbox' )  value = target.checked
+       
         console.log('value:', value)
         setBook((prevBook) => {
             const book = { ...prevBook}
-            if(value === 'on') book.listPrice[field] = false
-            else if(value === 'off') book.listPrice[field] = true
-            else book.listPrice[field] = value
+            book.listPrice[field] = value
             return book
         })
     }

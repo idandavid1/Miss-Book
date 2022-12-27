@@ -7,7 +7,6 @@
 }
 
 .details-container{
-    width: 400px;
     display: flex;
     flex-direction: column;
 }
@@ -35,4 +34,10 @@
     font-weight: bolder;
     cursor: pointer;
 }
+
+@media (min-width: 450px) {
+    .details-container {
+        width: 400px;
+    }
+  }
 
